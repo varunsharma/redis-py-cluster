@@ -1,7 +1,10 @@
 os: linux
 dist: xenial
 language: python
-cache: pip
+cache:
+  pip: true
+  directories:
+    - .ci-replay-cache
 python:
   - "2.7"
   - "3.5"
@@ -42,7 +45,7 @@ env:
 script:
   - make start
   - coverage erase
-  - coverage run --source rediscluster -p -m py.test
+  - CI_REPLAY_LANE="${REDIS_VERSION}-${HIREDIS}" CI_REPLAY_CACHE_DIR="$PWD/.ci-replay-cache" timeout --signal=TERM --kill-after=30s 45m coverage run --source rediscluster -p -m py.test -p ci_replay --maxfail=1 --timeout=600
 after_success:
   - coverage combine
   - coveralls

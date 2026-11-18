@@ -4,6 +4,7 @@
 env27*
 .tox
 .coverage*
+.ci-replay-cache/
 dump.rdb
 redis-git
 htmlcov
