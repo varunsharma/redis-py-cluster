@@ -2,6 +2,8 @@
 
 coverage
 pytest
+pytest-timeout==1.4.2; python_version < "3.8"
+pytest-timeout==2.3.1; python_version >= "3.8"
 testfixtures
 mock
 docopt
